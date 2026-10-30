@@ -1,0 +1,339 @@
+:root {
+    --bordô: #7A2621;         
+    --bordô-light: #5E1B17;   
+    --rosa: #eac8d6;          
+    --rosa-light: #f5e4ed;    
+    --creme: #f8f0e0;         
+    --creme-light: #FDFBF7;   
+    --dark: #382d29;          
+    --gray: #615551;          
+    --white: #FFFFFF;         
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--creme);
+    color: var(--dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Canvas de partículas em tela cheia cobrindo tudo no carregamento */
+#globalParticleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background-color: var(--creme);
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+/* O site começa oculto e vai fazendo fade-in enquanto as partículas se montam */
+.site-wrapper {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-wrapper.loaded {
+    opacity: 1;
+}
+
+h1, h2, h3, .brand-badge, .brand-small {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+}
+
+.italic-text {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--bordô);
+}
+
+.page-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.intro-view, .form-view {
+    width: 100%;
+    max-width: 720px;
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.intro-view.active, .form-view.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.intro-content-wrapper {
+    text-align: center;
+    width: 100%;
+}
+
+.brand-badge {
+    background: rgba(248, 231, 231, 0.9);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--bordô);
+    border: 1px solid rgba(167, 90, 141, 0.418);
+    display: inline-block;
+    margin-bottom: 20px;
+    letter-spacing: 1.5px;
+}
+
+.intro-content-wrapper h1 {
+    font-size: 40px;
+    color: var(--dark);
+    line-height: 1.15;
+    margin-bottom: 12px;
+    font-weight: 300;
+}
+
+.hero-subtitle {
+    font-size: 17px;
+    color: var(--gray);
+    margin-bottom: 10px;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.photo-impact-container {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    border-radius: 80px;
+    overflow: hidden;
+    background-color: #2E2522;
+    box-shadow: 0 25px 60px rgba(56, 45, 41, 0.18);
+    margin-bottom: 35px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.reveal-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cambridge-badge-float {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background-color: var(--bordô);
+    color: #f8e7e7;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(122, 38, 33, 0.3);
+    text-align: center;
+}
+
+.cambridge-badge-float .badge-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 2px;
+    margin-bottom: 2px;
+}
+
+.cambridge-badge-float .badge-subtitle {
+    font-size: 9px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.cta-action-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.btn-commercial-epic {
+    position: relative;
+    background-color: var(--bordô);
+    color: #f8e7e7;
+    border: none;
+    padding: 20px 44px;
+    border-radius: 80px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 1.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    overflow: hidden;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(122, 38, 33, 0.3);
+}
+
+.btn-commercial-epic:hover {
+    background-color: var(--bordô-light);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(122, 38, 33, 0.45);
+}
+
+.cta-microcopy {
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 500;
+}
+
+/* FORMULÁRIO */
+.form-card-box {
+    background-color: var(--white);
+    border-radius: 28px;
+    width: 100%;
+    padding: 45px 40px;
+    box-shadow: 0 25px 60px rgba(56, 45, 41, 0.12);
+    border: 1px solid #F0EAE1;
+}
+
+.btn-back {
+    background: transparent;
+    border: none;
+    color: var(--gray);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    transition: color 0.2s;
+}
+
+.btn-back:hover {
+    color: var(--bordô);
+}
+
+.form-header-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.brand-small {
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: var(--bordô);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.form-card-box h2 {
+    font-size: 32px;
+    color: var(--dark);
+    margin-bottom: 6px;
+}
+
+.modal-subtitle {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid #DED7CD;
+    background-color: var(--white);
+    font-family: inherit;
+    font-size: 14.5px;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--bordô);
+}
+
+.btn-submit-form {
+    width: 100%;
+    background-color: var(--bordô);
+    color: var(--white);
+    border: none;
+    padding: 16px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.btn-submit-form:hover {
+    background-color: var(--bordô-light);
+}
+
+footer {
+    padding: 15px 8%;
+    background-color: #2E2522;
+    color: #EBE4DC;
+    text-align: center;
+    font-size: 11px;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 600px) {
+    .intro-content-wrapper h1 {
+        font-size: 34px;
+    }
+    .photo-impact-container {
+        height: 340px;
+    }
+    .form-card-box {
+        padding: 30px 20px;
+    }
+}

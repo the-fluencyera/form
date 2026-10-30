@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fluency Era | form</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- CANVAS DO EFEITO DE PARTÍCULAS EM TELA INTEIRA -->
+    <canvas id="globalParticleCanvas"></canvas>
+
+    <!-- O CONTEÚDO REAL DA PÁGINA (Fica oculto até o efeito de montagem terminar) -->
+    <div id="siteWrapper" class="site-wrapper">
+
+        <main class="page-container">
+
+            <!-- TELA 1: CAPA COMERCIAL -->
+            <section id="introView" class="intro-view active">
+                <div class="intro-content-wrapper">
+
+                    <h1>Destrave sua fluência com <br> <span class="italic-text">acompanhamento real.</span></h1>
+
+                    <div class="cta-action-area">
+                        <button id="showFormBtn" class="btn-commercial-epic">
+                            <span class="btn-glow-effect"></span>
+                            <span class="btn-text">PREENCHER O FORMULÁRIO</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <p class="hero-subtitle">Uma abordagem personalizada para transformar o seu inglês</p>
+
+                    <div class="photo-impact-container">
+                        <img src="IMG/meio.jpg" alt="Teacher Laura Morales" class="reveal-photo">
+                    </div>
+
+                    <div class="badge-wrapper">
+                        <span class="brand-badge">✦ THE FLUENCY ERA · EXPERIÊNCIA EXCLUSIVA</span>
+                    </div>
+
+
+                </div>
+            </section>
+
+            <!-- TELA 2: FORMULÁRIO -->
+            <section id="formView" class="form-view">
+                <div class="form-card-box">
+                    <button id="backToIntroBtn" class="btn-back">
+                        <i class="fa-solid fa-arrow-left"></i> Voltar para a apresentação
+                    </button>
+
+                    <div class="form-header-title">
+                        <span class="brand-small">THE FLUENCY ERA</span>
+                        <h2>Início da jornada de fluência</h2>
+                        <p class="modal-subtitle">Preencha os detalhes e vamos conversar diretamente no WhatsApp da
+                            Teacher!</p>
+                    </div>
+
+                    <form id="whatsappForm">
+                        <div class="form-group">
+                            <label for="userName">Seu Nome Completo</label>
+                            <input type="text" id="userName" placeholder="Ex: Antonio Marques" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userAge">Sua Idade</label>
+                            <input type="number" id="userAge" placeholder="Ex: 28" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="englishLevel">Como você avalia seu inglês hoje?</label>
+                            <select id="englishLevel" required>
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                <option value="Iniciante">Iniciante (Não sei nada ou muito pouco)</option>
+                                <option value="Básico">Básico (Entendo um pouco, mas travo na fala)</option>
+                                <option value="Intermediário">Intermediário (Já me comunico, mas procuro
+                                    aperfeiçoamento)</option>
+                                <option value="Avançado">Avançado (Sou fluente, mas quero refinar meu inglês)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hasExperience">Já teve experiências anteriores com o inglês?</label>
+                            <select id="hasExperience" required>
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                <option value="Não">Não</option>
+                                <option value="Sim, em cursos tradicionais">Sim, em cursos tradicionais</option>
+                                <option value="Sim, com professores particulares">Sim, com professores particulares
+                                </option>
+                                <option value="Sim, de forma autodidata">Sim, por conta própria</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userObjective">Qual seu principal objetivo com o idioma?</label>
+                            <textarea id="userObjective"
+                                placeholder="Ex: Viagem, Promoção no Trabalho, Conversação, etc." rows="3"
+                                required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="preferredPlan">Qual plano melhor atende sua necessidade?</label>
+                            <select id="preferredPlan" required>
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                <option value="1x na semana">1x na semana</option>
+                                <option value="2x na semana">2x na semana</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="preferredDay">Qual o melhor dia da semana pra você?</label>
+                            <select id="preferredDay" required>
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                <option value="Segunda">Segunda</option>
+                                <option value="Terça">Terça</option>
+                                <option value="Quarta">Quarta</option>
+                                <option value="Quinta">Quinta</option>
+                                <option value="Sexta">Sexta</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="preferredTime">Preferência de horário para as aulas:</label>
+                            <select id="preferredTime" required>
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                <option value="Manhã">Manhã</option>
+                                <option value="Tarde">Tarde</option>
+                                <option value="Noite">Noite</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-submit-form">Enviar e Iniciar Chat no WhatsApp</button>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2026 The Fluency Era — Desenvolvido por Tony Mark.</p>
+        </footer>
+
+    </div>
+
+    <script src="Js/script.js"></script>
+</body>
+
+</html>
